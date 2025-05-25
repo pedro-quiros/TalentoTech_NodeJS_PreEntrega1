@@ -1,14 +1,13 @@
 const [,, metodo, recurso, ...args] = process.argv;
 const parametro = args[0]; // útil para métodos como GET/DELETE con 1 solo parámetro
 
+const URL_BASE = 'https://fakestoreapi.com';
 
 async function obtenerTodosLosProductos() {
     try {
-      const response = await fetch('https://fakestoreapi.com/products'); 
+      const response = await fetch(URL_BASE + '/products'); 
       const data = await response.json(); 
-    // console.log(data); // Muestra la estructura completa de los datos en la consola
-   
-    // Mostrar productos resumidos
+
     data.forEach(({ id, title, price }) => {
       console.log(`ID: ${id} | ${title} | $${price}`);
     });
@@ -23,11 +22,9 @@ async function obtenerTodosLosProductos() {
 
 async function obtenerProductoPorID(productoID) {
     try {
-      const response = await fetch(`https://fakestoreapi.com/products/${productoID}`); 
+      const response = await fetch(`${URL_BASE}/products/${productoID}`); 
       const data = await response.json();
-     // console.log(data);  // Muestra la estructura completa de los datos en la consola
 
-      // Mostrar productos resumidos
       const { id, title, price } = data;
       console.log(`ID: ${id} | ${title} | $${price}`);
 
@@ -38,12 +35,12 @@ async function obtenerProductoPorID(productoID) {
     }
 }
 
+
 async function eliminarProductoPorID(productoID) {
     try {
-        const response = await fetch(`https://fakestoreapi.com/products/${productoID}`, {
+        const response = await fetch(`${URL_BASE}/products/${productoID}`, {
             method: 'DELETE'
         });
-
         const data = await response.json();
         
         // Mostrar confirmación de producto eliminado
@@ -57,9 +54,10 @@ async function eliminarProductoPorID(productoID) {
     }
 }
 
+
 async function agregarProducto(title, price, category) {
     try {
-        const response = await fetch(`https://fakestoreapi.com/products/`, {
+        const response = await fetch(`${URL_BASE}/products/`, {
             method: 'POST',
             body: JSON.stringify({
                 title,
@@ -82,23 +80,42 @@ async function agregarProducto(title, price, category) {
 }
 
 
-if (metodo === 'GET' && recurso === 'products' && !parametro) {
-  obtenerTodosLosProductos();
-} 
-else if (metodo === 'GET' && recurso === 'products' && parametro) {
-  obtenerProductoPorID(parametro);
-} 
-else if (metodo === 'DELETE' && recurso === 'products' && parametro) {
-  eliminarProductoPorID(parametro);
-} 
-else if (metodo === 'POST' && recurso === 'products' && args.length >= 3) {
-  const [title, price, category] = args;
-  agregarProducto(title, price, category);
-} 
-else {
-  console.log("Comando no válido. Usa:\n" +
-              "- npm run start GET products\n" +
-              "- npm run start GET products <id>\n" +
-              "- npm run start DELETE products <id>\n" +
-              "- npm run start POST products <title> <price> <category>");
+// Switch para ejecutar el programa
+switch (metodo) {
+  case 'GET':
+    if (recurso === 'products') {
+      if (parametro) {
+        obtenerProductoPorID(parametro);
+      } else {
+        obtenerTodosLosProductos();
+      }
+    } else {
+      console.log("Recurso GET no reconocido.");
+    }
+    break;
+
+  case 'DELETE':
+    if (recurso === 'products' && parametro) {
+      eliminarProductoPorID(parametro);
+    } else {
+      console.log("DELETE requiere un ID.");
+    }
+    break;
+
+  case 'POST':
+    if (recurso === 'products' && args.length >= 3) {
+      const [title, price, category] = args;
+      agregarProducto(title, price, category);
+    } else {
+      console.log("POST requiere título, precio y categoría.");
+    }
+    break;
+
+  default:
+    console.log("Comando no válido. Usa:\n" +
+                "- npm run start GET products\n" +
+                "- npm run start GET products <id>\n" +
+                "- npm run start DELETE products <id>\n" +
+                "- npm run start POST products <title> <price> <category>");
+    break;
 }
