@@ -5,7 +5,6 @@ Aplicación CLI para administrar productos de una tienda en línea utilizando la
 
 ## Requisitos  
 - Node.js v14 o superior  
-- Conexión a Internet para consumir la API
 
 ## Instalación  
 1. Clona este repositorio o descarga el proyecto.  
