@@ -35,8 +35,3 @@ Ejecuta los comandos con el siguiente formato:
 `npm run start -- POST products "Camiseta Retro" 250 remeras`  
 `npm run start -- DELETE products 7`
 
-## Notas  
-- El programa usa fetch para realizar peticiones HTTP a la API FakeStore.  
-- Asegúrate de ingresar correctamente los argumentos para el comando POST (título, precio y categoría).  
-- Este proyecto es una demostración de manejo de APIs, comandos y lógica dinámica en Node.js.
-
