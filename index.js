@@ -68,9 +68,10 @@ async function agregarProducto(title, price, category) {
                 'Content-Type': 'application/json'
             }
         });
-
         const data = await response.json();
-        console.log(`Producto creado con ID: ${data.id}`);
+
+        console.log(`Producto creado con ID: ${data.id}`); 
+        console.log(`Producto: ${data.title} | $${data.price}`);
         
     } catch (error) {
         console.error("Error al agregar producto:", error);
@@ -78,6 +79,7 @@ async function agregarProducto(title, price, category) {
         console.log("Fin de la consulta.");
     }
 }
+
 
 
 // Switch para ejecutar el programa
