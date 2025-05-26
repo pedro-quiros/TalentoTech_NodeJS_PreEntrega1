@@ -31,6 +31,6 @@ Ejecuta los comandos con el siguiente formato:
 ## Ejemplos  
 `npm run start GET products`  
 `npm run start GET products 15`  
-`npm run start POST products Zapatillas deportivas 45.000 Indumentaria`  
+`npm run start POST products Zapatillas 45.000 Indumentaria`  
 `npm run start DELETE products 7`
 
