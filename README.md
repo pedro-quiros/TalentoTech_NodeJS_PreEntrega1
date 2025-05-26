@@ -29,8 +29,8 @@ Ejecuta los comandos con el siguiente formato:
 `npm run start -- DELETE products <id>`
 
 ## Ejemplos  
-`npm run start -- GET products`  
-`npm run start -- GET products 15`  
-`npm run start -- POST products Zapatillas deportivas 45.000 Indumentaria`  
-`npm run start -- DELETE products 7`
+`npm run start GET products`  
+`npm run start GET products 15`  
+`npm run start POST products Zapatillas deportivas 45.000 Indumentaria`  
+`npm run start DELETE products 7`
 
